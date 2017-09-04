@@ -1,5 +1,5 @@
-# generator-jhipster-swagger-migration [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Sample JHipster module,  generates entities for all definitions in a swagger document
+# generator-jhipster-swagger-migration
+> A JHipster module that generates entities for all definitions in a swagger document
 
 ## Usage
 
