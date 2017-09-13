@@ -49,12 +49,14 @@ module.exports = generator.extend({
         const javaDir = jhipsterVar.javaDir;
         const resourceDir = jhipsterVar.resourceDir;
         const webappDir = jhipsterVar.webappDir;
+        const changelogDate = "20170510113832";
+        var count = 1;
 
         for(definition in swaggerDoc.definitions){
            if(definition.substring(0, 10) !== "Collection" && swaggerDoc.definitions[definition].type !== "array"){
                 var entity = {
                    "fluentMethods": true,
-                   "changelogDate": "20170510113832",
+                   "changelogDate": changelogDate "-" count,
                    "dto": "no",
                    "service": "serviceClass",
                    "entityTableName": definition,
@@ -82,7 +84,24 @@ module.exports = generator.extend({
                     }
                }
                this.fs.writeJSON(this.destinationPath('.jhipster/' + definition + '.json'), entity);
+                count++;
            }
+        }
+
+        for(definition in swaggerDoc.definitions){
+         if(definition.substring(0, 10) !== "Collection" && swaggerDoc.definitions[definition].type !== "array"){
+               this.composeWith('jhipster:entity', {
+                                          regenerate: true,
+                                          'skip-install': true,
+                                          'skip-client': false,
+                                          'skip-server': false,
+                                          'no-fluent-methods': false,
+                                          'skip-user-management': false,
+                                          arguments: [definition],
+                                      });
+
+
+               }
         }
     },
 
