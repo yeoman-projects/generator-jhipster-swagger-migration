@@ -1,27 +1,56 @@
-# generator-jhipster-swagger-migration
+<div>
+    <a href="http://jhipster.github.io">
+        <img src="https://github.com/sonalake/generator-jhipster-multitenancy/raw/master/images/logo-jhipster.png">
+    </a>
+</div>
+Greetings, Java Hipster!
+
+# generator-jhipster-multitenancy
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > A JHipster module that generates entities for all definitions in a swagger document
 
-## Usage
 
-This is a [JHipster](http://jhipster.github.io/) module, that is meant to be use in a JHipster application.
+# Introduction
 
-## Installation
-As this is a [JHipster](http://jhipster.github.io/) module, you need to have JHipster and its related tools already installed.
+This is a [JHipster](http://jhipster.github.io/) module, that is intended to be applied to a JHipster application. This module is used to generates entities for all definitions in a swagger document
+
+# Table of contents
+
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Usage](#usage)
+
+# Prerequisites
+
+As this is a [JHipster](http://jhipster.github.io/) module, we expect you have JHipster and its related tools already installed:
+
+- [Installing JHipster](https://jhipster.github.io/installation.html)
+
+# Installation
+
+If you are using Yarn:
 
 ```bash
+# install the module
+yarn global add generator-jhipster-swagger-migration
+
+# update the module
+yarn global upgrade generator-jhipster-swagger-migration
+```
+
+If you are using npm:
+
+```bash
+#install the module
 npm install -g generator-jhipster-swagger-migration
+
+# update the module
+npm update -g generator-jhipster-swagger-migration
 ```
 
-To run this generator in your local environment, run the command below. This will refresh, if you make any changes.
+# Usage
 
-```bash
-cd generator-jhipster-swagger-migration
-npm link
-```
-
-## Running
-
-Then run the module on a JHipster generated application:
+After installation, run the module on a JHipster generated application:
 
 ```bash
 yo jhipster-swagger-migration
