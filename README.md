@@ -54,3 +54,7 @@ After installation, run the module on a JHipster generated application:
 ```bash
 yo jhipster-swagger-migration
 ```
+
+# License
+
+Apache-2.0 © [Jonathan Duggan](https://github.com/jduggan83)
