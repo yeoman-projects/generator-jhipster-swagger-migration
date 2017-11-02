@@ -51,12 +51,13 @@ module.exports = generator.extend({
         const webappDir = jhipsterVar.webappDir;
         const changelogDate = "20170510113832";
         var count = 1;
+        this.entities = [];
 
         for(definition in swaggerDoc.definitions){
            if(definition.substring(0, 10) !== "Collection" && swaggerDoc.definitions[definition].type !== "array"){
                 var entity = {
                    "fluentMethods": true,
-                   "changelogDate": changelogDate "-" count,
+                   "changelogDate": changelogDate + "-" + count,
                    "dto": "no",
                    "service": "serviceClass",
                    "entityTableName": definition,
@@ -84,53 +85,25 @@ module.exports = generator.extend({
                     }
                }
                this.fs.writeJSON(this.destinationPath('.jhipster/' + definition + '.json'), entity);
+               this.entities.push(definition);
                 count++;
            }
         }
-
-        for(definition in swaggerDoc.definitions){
-         if(definition.substring(0, 10) !== "Collection" && swaggerDoc.definitions[definition].type !== "array"){
-               this.composeWith('jhipster:entity', {
-                                          regenerate: true,
-                                          'skip-install': true,
-                                          'skip-client': false,
-                                          'skip-server': false,
-                                          'no-fluent-methods': false,
-                                          'skip-user-management': false,
-                                          arguments: [definition],
-                                      });
-
-
-               }
-        }
     },
-
     install() {
-        let logMsg =
-            `To install your dependencies manually, run: ${chalk.yellow.bold(`${this.clientPackageManager} install`)}`;
-
-        if (this.clientFramework === 'angular1') {
-            logMsg =
-                `To install your dependencies manually, run: ${chalk.yellow.bold(`${this.clientPackageManager} install & bower install`)}`;
+        for(var i=0; i < this.entities.length; i++){
+            this.composeWith('jhipster:entity', {
+                   regenerate: true,
+                   'skip-install': true,
+                   'skip-client': false,
+                   'skip-server': false,
+                   'no-fluent-methods': false,
+                   'skip-user-management': false,
+                   arguments: [this.entities[i]],
+             });
         }
-        const injectDependenciesAndConstants = (err) => {
-            if (err) {
-                this.warning('Install of dependencies failed!');
-                this.log(logMsg);
-            } else if (this.clientFramework === 'angular1') {
-                this.spawnCommand('gulp', ['install']);
-            }
-        };
-        const installConfig = {
-            bower: this.clientFramework === 'angular1',
-            npm: this.clientPackageManager !== 'yarn',
-            yarn: this.clientPackageManager === 'yarn',
-            callback: injectDependenciesAndConstants
-        };
-        this.installDependencies(installConfig);
     },
-
     end() {
-        this.log('End of fortune generator');
+        this.log('End of generator');
     }
 });
