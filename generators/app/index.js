@@ -86,7 +86,7 @@ module.exports = class extends BaseGenerator {
                            "ownerSide": true,
                            "otherEntityRelationshipName": definition
                         });
-                    }else{
+                    }else if(this.swaggerDefinition.definitions[definition].properties[propertyKey].$ref == null){
                         entity.fields.push({
                            "fieldName": propertyKey,
                            "fieldType": this.swaggerDefinition.definitions[definition].properties[propertyKey].type
