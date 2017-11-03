@@ -3,6 +3,7 @@ const packagejs = require('../../package.json');
 const semver = require('semver');
 const BaseGenerator = require('generator-jhipster/generators/generator-base');
 const jhipsterConstants = require('generator-jhipster/generators/generator-constants');
+const readYaml = require('read-yaml');
 
 module.exports = class extends BaseGenerator {
     constructor(args, opts) {
@@ -58,13 +59,13 @@ module.exports = class extends BaseGenerator {
         this.clientPackageManager = this.jhipsterAppConfig.clientPackageManager;
         this.buildTool = this.jhipsterAppConfig.buildTool;
         this.entities = [];
-        this.swaggerDefinition = this.fs.readJSON(this.swaggerFile);
+        this.swaggerDefinition = readYaml.sync(this.swaggerFile);
 
         for(var definition in this.swaggerDefinition.definitions){
            if(definition.substring(0, 10) !== "Collection" && this.swaggerDefinition.definitions[definition].type !== "array"){
                 var entity = {
                    "fluentMethods": true,
-                   "changelogDate": jhipsterConstants.dateFormatForLiquibase,
+                   "changelogDate": this.dateFormatForLiquibase(),
                    "dto": "no",
                    "service": "serviceClass",
                    "entityTableName": definition,

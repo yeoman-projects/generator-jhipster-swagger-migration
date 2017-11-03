@@ -1,0 +1,4 @@
+Description:
+    Creates entities from the passed swagger yaml file location
+Example:
+    yo jhipster-swagger-migration .\petstore.yaml

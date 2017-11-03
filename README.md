@@ -52,7 +52,7 @@ npm update -g generator-jhipster-swagger-migration
 After installation, run the module on a JHipster generated application:
 
 ```bash
-yo jhipster-swagger-migration
+yo jhipster-swagger-migration .\petstore.yaml
 ```
 
 # License
